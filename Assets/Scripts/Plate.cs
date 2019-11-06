@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plate : MonoBehaviour
+namespace Game
 {
-    [SerializeField] private CardinalDirection direction;
+    public class Plate : MonoBehaviour
+    {
+        [SerializeField] private CardinalDirection direction;
+    }
 }

@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Field : MonoBehaviour
+namespace Game
 {
-    [SerializeField] private Plate northPlate;
-    [SerializeField] private Plate eastPlate;
-    [SerializeField] private Plate southPlate;
-    [SerializeField] private Plate westplate;
-
-    public Plate GetPlate(CardinalDirection direction)
+    public class Field : MonoBehaviour
     {
-        switch(direction)
+        [SerializeField] private Plate northPlate;
+        [SerializeField] private Plate eastPlate;
+        [SerializeField] private Plate southPlate;
+        [SerializeField] private Plate westplate;
+
+        public Plate GetPlate(CardinalDirection direction)
         {
-            case CardinalDirection.North:
-                return northPlate;
-            case CardinalDirection.East:
-                return eastPlate;
-            case CardinalDirection.South:
-                return southPlate;
-            case CardinalDirection.West:
-                return westplate;
-            default:
-                return null;
+            switch (direction)
+            {
+                case CardinalDirection.North:
+                    return northPlate;
+                case CardinalDirection.East:
+                    return eastPlate;
+                case CardinalDirection.South:
+                    return southPlate;
+                case CardinalDirection.West:
+                    return westplate;
+                default:
+                    return null;
+            }
         }
     }
 }

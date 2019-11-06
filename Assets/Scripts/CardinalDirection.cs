@@ -1,10 +1,13 @@
 ﻿using System;
 
-public enum CardinalDirection
+namespace Game
 {
-    None,
-    North,
-    East,
-    South,
-    West
+    public enum CardinalDirection
+    {
+        None,
+        North,
+        East,
+        South,
+        West
+    }
 }

@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+namespace Game
 {
-    [SerializeField] private GameObject ballPrefab;
-    private GameObjectPool balls;
-    [SerializeField] private float timeBetweenBallSpawns = 1.00f;
-    private float timeToNextBallSpawn;
-
-    private void Start()
+    public class Boss : MonoBehaviour
     {
-        balls = new GameObjectPool(ballPrefab);
-        timeToNextBallSpawn = timeBetweenBallSpawns;
-    }
+        [SerializeField] private GameObject ballPrefab;
+        private GameObjectPool balls;
+        [SerializeField] private float timeBetweenBallSpawns = 1.00f;
+        private float timeToNextBallSpawn;
 
-    private void Update()
-    {
-        timeToNextBallSpawn -= Time.deltaTime;
-        if (timeToNextBallSpawn <= 0.00f)
+        private void Start()
         {
+            balls = new GameObjectPool(ballPrefab);
             timeToNextBallSpawn = timeBetweenBallSpawns;
-            GameObject ball = balls.Withdraw();
-            ball.transform.position = new Vector3(transform.position.x, 0.50f, transform.position.z);
+        }
+
+        private void Update()
+        {
+            timeToNextBallSpawn -= Time.deltaTime;
+            if (timeToNextBallSpawn <= 0.00f)
+            {
+                timeToNextBallSpawn = timeBetweenBallSpawns;
+                GameObject ball = balls.Withdraw();
+                ball.transform.position = new Vector3(transform.position.x, 0.50f, transform.position.z);
+            }
         }
     }
 }

@@ -2,44 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectPool
+namespace Game
 {
-    private readonly GameObject prefab;
-    private readonly Queue<GameObject> items;
-    private int whatevs = 5;
-
-
-    public GameObjectPool(GameObject prefab, int initialAmount = 0)
+    public class GameObjectPool
     {
-        this.prefab = prefab;
-        items = new Queue<GameObject>();
-        Create(initialAmount);
-    }
+        private readonly GameObject prefab;
+        private readonly Queue<GameObject> items;
 
-    public GameObject Withdraw()
-    {
-        if (items.Count == 0)
+        public GameObjectPool(GameObject prefab, int initialAmount = 0)
         {
-            Create(1);
+            this.prefab = prefab;
+            items = new Queue<GameObject>();
+            Create(initialAmount);
         }
-        GameObject item = items.Dequeue();
-        item.SetActive(true);
-        return item;
-    }
 
-    public void Deposit(GameObject item)
-    {
-        item.SetActive(false);
-        items.Enqueue(item);
-    }
-
-    private void Create(int amount = 1)
-    {
-        for (int i = 0; i < amount; i++)
+        public GameObject Withdraw()
         {
-            GameObject item = Object.Instantiate(prefab);
+            if (items.Count == 0)
+            {
+                Create(1);
+            }
+            GameObject item = items.Dequeue();
+            item.SetActive(true);
+            return item;
+        }
+
+        public void Deposit(GameObject item)
+        {
             item.SetActive(false);
             items.Enqueue(item);
+        }
+
+        private void Create(int amount = 1)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                GameObject item = Object.Instantiate(prefab);
+                item.SetActive(false);
+                items.Enqueue(item);
+            }
         }
     }
 }

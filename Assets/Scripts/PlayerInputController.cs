@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Player))]
-public class PlayerInputController : MonoBehaviour
+namespace Game
 {
-    private Player player;
-
-    private void Start()
+    [RequireComponent(typeof(Player))]
+    public class PlayerInputController : MonoBehaviour
     {
-        player = GetComponent<Player>();
-    }
+        private Player player;
 
-    void Update()
-    {
-        CardinalDirection direction = CardinalDirection.None;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        private void Start()
         {
-            direction = CardinalDirection.North;
+            player = GetComponent<Player>();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+
+        void Update()
         {
-            direction = CardinalDirection.East;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            direction = CardinalDirection.South;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            direction = CardinalDirection.West;
-        }
-        if (direction != CardinalDirection.None)
-        {
-            player.MoveInDirection(direction);
+            CardinalDirection direction = CardinalDirection.None;
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                direction = CardinalDirection.North;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                direction = CardinalDirection.East;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                direction = CardinalDirection.South;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                direction = CardinalDirection.West;
+            }
+            if (direction != CardinalDirection.None)
+            {
+                player.MoveInDirection(direction);
+            }
         }
     }
 }
