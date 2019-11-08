@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameObjectPool
+    public class EntityPool
     {
         private readonly GameObject prefab;
         private readonly Queue<GameObject> items;
 
-        public GameObjectPool(GameObject prefab, int initialAmount = 0)
+        public EntityPool(GameObject prefab, int initialAmount = 0)
         {
             this.prefab = prefab;
             items = new Queue<GameObject>();
@@ -38,8 +38,12 @@ namespace Game
             for (int i = 0; i < amount; i++)
             {
                 GameObject item = Object.Instantiate(prefab);
-                item.SetActive(false);
-                items.Enqueue(item);
+                Entity entity = item.GetComponent<Entity>();
+                if (entity)
+                {
+                    entity.pool = this;
+                }
+                Deposit(item);
             }
         }
     }

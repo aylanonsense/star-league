@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Plate : MonoBehaviour
+    public class Plate : Entity
     {
         [SerializeField] private CardinalDirection direction;
     }

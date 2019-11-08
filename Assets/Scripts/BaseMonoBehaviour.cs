@@ -4,12 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public enum CardinalDirection
+    public class BaseMonoBehaviour : MonoBehaviour
     {
-        None,
-        North,
-        East,
-        South,
-        West
     }
 }

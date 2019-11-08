@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Player : MonoBehaviour
+    public class Batter : Entity
     {
         [SerializeField] private Field field;
         private Plate plate;

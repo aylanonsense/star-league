@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Player))]
-    public class PlayerInputController : MonoBehaviour
+    [RequireComponent(typeof(Batter))]
+    public class BatterInputController : BaseMonoBehaviour
     {
-        private Player player;
+        private Batter batter;
 
         private void Start()
         {
-            player = GetComponent<Player>();
+            batter = GetComponent<Batter>();
         }
 
         void Update()
@@ -35,7 +35,7 @@ namespace Game
             }
             if (direction != CardinalDirection.None)
             {
-                player.MoveInDirection(direction);
+                batter.MoveInDirection(direction);
             }
         }
     }

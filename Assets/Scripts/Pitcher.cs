@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Boss : MonoBehaviour
+    public class Pitcher : Entity
     {
         [SerializeField] private GameObject ballPrefab;
-        private GameObjectPool balls;
+        private EntityPool balls;
         [SerializeField] private float timeBetweenBallSpawns = 1.00f;
         private float timeToNextBallSpawn;
 
         private void Start()
         {
-            balls = new GameObjectPool(ballPrefab);
+            balls = new EntityPool(ballPrefab);
             timeToNextBallSpawn = timeBetweenBallSpawns;
         }
 

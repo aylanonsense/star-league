@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1291185708241409963}
   - component: {fileID: 1291185708241409972}
   m_Layer: 0
-  m_Name: Boss Sprite
+  m_Name: Pitcher Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5413430295414210387}
   - component: {fileID: 3404955647280318478}
   m_Layer: 0
-  m_Name: Boss
+  m_Name: Pitcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5110357080385463611}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156b53f54f55f419191cf0616600fc2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 08ebb975693304b23a0a2a30c14a2a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 4482125713927268016, guid: ef7080a1411c943b18ae689d1f85dc99,
     type: 3}
+  timeBetweenBallSpawns: 1

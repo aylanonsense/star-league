@@ -387,6 +387,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 13.89, y: 0, z: 0}
+--- !u!1 &1026063857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1026063858}
+  - component: {fileID: 1026063859}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1026063858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026063857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026063859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026063857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2772313a77f8446ccafde5f95abdeab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1804001596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -493,7 +536,7 @@ PrefabInstance:
     - target: {fileID: 5110357080385463611, guid: 634f18f0740ac44c988af59c125fa413,
         type: 3}
       propertyPath: m_Name
-      value: Boss
+      value: Pitcher
       objectReference: {fileID: 0}
     - target: {fileID: 5413430295414210387, guid: 634f18f0740ac44c988af59c125fa413,
         type: 3}
@@ -562,7 +605,7 @@ PrefabInstance:
     - target: {fileID: 1305576967157461198, guid: ca7a85610150c4d0082c11be8779dd54,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Batter
       objectReference: {fileID: 0}
     - target: {fileID: 1305576967157461197, guid: ca7a85610150c4d0082c11be8779dd54,
         type: 3}

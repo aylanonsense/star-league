@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Field : MonoBehaviour
+    public class Field : Entity
     {
         [SerializeField] private Plate northPlate;
         [SerializeField] private Plate eastPlate;

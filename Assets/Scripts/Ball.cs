@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Ball : MonoBehaviour
+    public class Ball : Entity
     {
         private void Start()
         {
