@@ -35,7 +35,7 @@ namespace Game
             }
             if (direction != CardinalDirection.None)
             {
-                batter.MoveInDirection(direction);
+                batter.Move(direction);
             }
         }
     }

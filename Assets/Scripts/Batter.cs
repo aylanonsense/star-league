@@ -4,24 +4,23 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Animator))]
     public class Batter : Entity
     {
-        //private enum BatterState
-        //{
-        //    Ready,
-        //    Moving
-        //}
+        private enum BatterState
+        {
+            Ready,
+            Moving
+        }
 
         [SerializeField] private Field field;
-        //private BatterState state;
         private Plate plate;
-        private Animator stateMachine;
+        private Plate nextPlate;
+        private Plate prevPlate;
+        private StateMachine<BatterState> stateMachine;
 
         private void Awake()
         {
-            stateMachine = GetComponent<Animator>();
-            //state = BatterState.Ready;
+            stateMachine = new StateMachine<BatterState>(BatterState.Ready);
         }
 
         private void Start()
@@ -31,7 +30,12 @@ namespace Game
 
         private void Update()
         {
-            
+            stateMachine.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            stateMachine.FixedUpdate();
         }
 
         public void SetPosition(CardinalDirection direction)
@@ -40,14 +44,17 @@ namespace Game
             transform.position = new Vector3(plate.transform.position.x, transform.position.y, plate.transform.position.z);
         }
 
-        public void MoveInDirection(CardinalDirection direction)
+        public bool CanMove()
         {
-            stateMachine.SetTrigger("StartMoving");
+            return stateMachine.state == BatterState.Ready;
         }
 
-        //private void SetState(BatterState state)
-        //{
-        //    this.state = state;
-        //}
+        public void Move(CardinalDirection direction)
+        {
+            stateMachine.SetState(BatterState.Moving);
+            nextPlate = field.GetPlate(direction);
+            prevPlate = plate;
+            plate = null;
+        }
     }
 }

@@ -53,3 +53,6 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
+# Silly Mac files
+.DS_Store
