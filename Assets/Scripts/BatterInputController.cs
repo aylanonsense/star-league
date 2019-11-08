@@ -14,7 +14,7 @@ namespace Game
             batter = GetComponent<Batter>();
         }
 
-        void Update()
+        private void Update()
         {
             CardinalDirection direction = CardinalDirection.None;
             if (Input.GetKeyDown(KeyCode.UpArrow))

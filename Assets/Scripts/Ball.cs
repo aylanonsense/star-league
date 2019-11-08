@@ -6,12 +6,7 @@ namespace Game
 {
     public class Ball : Entity
     {
-        private void Start()
-        {
-
-        }
-
-        void Update()
+        private void Update()
         {
             transform.position += Vector3.back * 20 * Time.deltaTime;
         }
