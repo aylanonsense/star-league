@@ -19,12 +19,8 @@ public class StateMachine<T>
 
     public void Update()
     {
-        framesSinceStateChange = framesSinceStateChange + 1;
-    }
-
-    public void FixedUpdate()
-    {
-        timeSinceStateChange = timeSinceStateChange + Time.deltaTime;
+        framesSinceStateChange += 1;
+        timeSinceStateChange += Time.deltaTime;
     }
 
     public void SetState(T state)

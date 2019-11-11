@@ -4,7 +4,5 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BaseMonoBehaviour : MonoBehaviour
-    {
-    }
+    public class BaseMonoBehaviour : MonoBehaviour { }
 }

@@ -6,11 +6,7 @@ namespace Game
 {
     public class Batter : Entity
     {
-        private enum BatterState
-        {
-            Ready,
-            Moving
-        }
+        public new readonly EntityType type = EntityType.Batter;
 
         [SerializeField] private Field field;
         private Plate plate;
@@ -18,24 +14,19 @@ namespace Game
         private Plate prevPlate;
         private StateMachine<BatterState> stateMachine;
 
-        private void Awake()
+        public override void Initialize()
         {
             stateMachine = new StateMachine<BatterState>(BatterState.Ready);
         }
 
-        private void Start()
+        public override void AddedToGame()
         {
             SetPosition(CardinalDirection.South);
         }
 
-        private void Update()
+        public override void UpdateState()
         {
             stateMachine.Update();
-        }
-
-        private void FixedUpdate()
-        {
-            stateMachine.FixedUpdate();
         }
 
         public void SetPosition(CardinalDirection direction)
@@ -51,10 +42,17 @@ namespace Game
 
         public void Move(CardinalDirection direction)
         {
-            stateMachine.SetState(BatterState.Moving);
-            nextPlate = field.GetPlate(direction);
-            prevPlate = plate;
-            plate = null;
+            SetPosition(direction);
+            //stateMachine.SetState(BatterState.Moving);
+            //nextPlate = field.GetPlate(direction);
+            //prevPlate = plate;
+            //plate = null;
+        }
+
+        private enum BatterState
+        {
+            Ready,
+            Moving
         }
     }
 }
