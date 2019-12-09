@@ -29,6 +29,7 @@ namespace Game
             List<Entity> existingEntities = new List<Entity>(FindObjectsOfType<Entity>());
             foreach (Entity entity in existingEntities)
             {
+                entity.DoCreated();
                 entity.DoInitialize();
                 newEntities.Add(entity);
             }
@@ -60,14 +61,16 @@ namespace Game
             newEntities.Clear();
         }
 
-        public Entity SpawnEntity(GameObject prefab)
-        {
-            return SpawnEntity(Entity.CreateEntity(prefab));
-        }
-
-        public Entity SpawnEntity(Entity entity)
+        public Entity AddEntityToGame(Entity entity)
         {
             newEntities.Add(entity);
+            return entity;
+        }
+
+        public Entity RemoveEntityFromGame(Entity entity)
+        {
+            entities.Remove(entity);
+            newEntities.Remove(entity);
             return entity;
         }
     }

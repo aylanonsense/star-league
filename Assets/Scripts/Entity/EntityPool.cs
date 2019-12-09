@@ -23,13 +23,12 @@ namespace Game
                 Create(1);
             }
             Entity entity = entities.Dequeue();
-            entity.gameObject.SetActive(true);
+            entity.DoInitialize();
             return entity;
         }
 
         public void Deposit(Entity entity)
         {
-            entity.gameObject.SetActive(false);
             entities.Enqueue(entity);
         }
 
@@ -37,7 +36,7 @@ namespace Game
         {
             for (int i = 0; i < amount; i++)
             {
-                Entity entity = Entity.CreateEntity(prefab);
+                Entity entity = Entity.CreateEntity(prefab, false);
                 entity.pool = this;
                 Deposit(entity);
             }

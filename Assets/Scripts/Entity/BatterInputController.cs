@@ -9,37 +9,13 @@ namespace Game
     {
         private Batter batter;
 
-        public override void  Initialize()
+        public override void Created()
         {
             batter = GetComponent<Batter>();
         }
 
         public override void MakeDecisions()
         {
-            if (batter.CanMove())
-            {
-                CardinalDirection direction = CardinalDirection.None;
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    direction = CardinalDirection.North;
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    direction = CardinalDirection.East;
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    direction = CardinalDirection.South;
-                }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    direction = CardinalDirection.West;
-                }
-                if (direction != CardinalDirection.None)
-                {
-                    batter.Move(direction);
-                }
-            }
         }
     }
 }

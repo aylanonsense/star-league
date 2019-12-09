@@ -12,10 +12,18 @@ namespace Game
 
         private EntityComponent[] components;
 
+        public void DoCreated()
+        {
+            gameObject.SetActive(false);
+            components = GetComponents<EntityComponent>();
+            foreach (EntityComponent component in components)
+            {
+                component.Created();
+            }
+        }
+
         public void DoInitialize()
         {
-            components = GetComponents<EntityComponent>();
-            //Array.Sort(components, new Comparison<EntityComponent>((a, b) => a.executionOrder.CompareTo(b.executionOrder)));
             foreach (EntityComponent component in components)
             {
                 component.Initialize();
@@ -24,6 +32,7 @@ namespace Game
 
         public void DoAddedToGame()
         {
+            gameObject.SetActive(true);
             foreach (EntityComponent component in components)
             {
                 component.AddedToGame();
@@ -46,11 +55,49 @@ namespace Game
             }
         }
 
-        public static Entity CreateEntity(GameObject prefab)
+        public void DoRemovedFromGame()
+        {
+            foreach (EntityComponent component in components)
+            {
+                component.RemovedFromGame();
+            }
+        }
+
+        public void DestroyOrReturnToPool()
+        {
+            if (pool == null)
+            {
+                foreach (EntityComponent component in components)
+                {
+                    component.Destroyed();
+                }
+            }
+            else
+            {
+                pool.Deposit(this);
+            }
+        }
+
+        public void AddToGame()
+        {
+            GameManager.Instance.AddEntityToGame(this);
+        }
+
+        public void RemoveFromGame()
+        {
+            GameManager.Instance.RemoveEntityFromGame(this);
+            gameObject.SetActive(false);
+        }
+
+        public static Entity CreateEntity(GameObject prefab, bool initialize = true)
         {
             GameObject gameObject = Instantiate(prefab);
             Entity entity = gameObject.GetComponent<Entity>();
-            entity.DoInitialize();
+            entity.DoCreated();
+            if (initialize)
+            {
+                entity.DoInitialize();
+            }
             return entity;
         }
     }
@@ -58,7 +105,7 @@ namespace Game
     public enum EntityType
     {
         None,
-        Pitcher,
-        Batter
+        Batter,
+        Pitcher
     }
 }
