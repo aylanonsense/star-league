@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1305576967157461197}
-  - component: {fileID: 6579935750547607497}
   - component: {fileID: 6001618021701403274}
+  - component: {fileID: 6579935750547607497}
   m_Layer: 0
   m_Name: Batter
   m_TagString: Untagged
@@ -33,18 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6579935750547607497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1305576967157461198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0728d57ac43934fd1b089fea0568af99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6001618021701403274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,7 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25de35ed39d947db977f5e371caf009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  field: {fileID: 0}
+--- !u!114 &6579935750547607497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305576967157461198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0728d57ac43934fd1b089fea0568af99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1305576967496732567
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,15 +20,15 @@ namespace Game
             stateMachine.Update();
         }
 
-        public bool CanMove()
+        public void Swing()
         {
-            return stateMachine.state == BatterState.Ready;
+
         }
 
         private enum BatterState
         {
             Ready,
-            Moving
+            Swinging
         }
     }
 }
