@@ -55,6 +55,14 @@ namespace Game
             }
         }
 
+        public void DoPrepareToRender()
+        {
+            foreach (EntityComponent component in components)
+            {
+                component.PrepareToRender();
+            }
+        }
+
         public void DoRemovedFromGame()
         {
             foreach (EntityComponent component in components)
@@ -106,6 +114,7 @@ namespace Game
     {
         None,
         Batter,
-        Pitcher
+        Pitcher,
+        Ball
     }
 }

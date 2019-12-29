@@ -6,9 +6,6 @@ namespace Game
 {
     public class Ball : Entity
     {
-        //private void Update()
-        //{
-        //    transform.position += Vector3.back * 20 * Time.deltaTime;
-        //}
+        public new readonly EntityType type = EntityType.Ball;
     }
 }

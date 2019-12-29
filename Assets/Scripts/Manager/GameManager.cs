@@ -21,6 +21,7 @@ namespace Game
         {
             MakeDecisions();
             UpdateState();
+            PrepareToRender();
             AddNewEntitiesToGame();
         }
 
@@ -51,6 +52,14 @@ namespace Game
             }
         }
 
+        private void PrepareToRender()
+        {
+            foreach (Entity entity in entities)
+            {
+                entity.DoPrepareToRender();
+            }
+        }
+
         private void AddNewEntitiesToGame()
         {
             foreach (Entity entity in newEntities)
@@ -71,6 +80,7 @@ namespace Game
         {
             entities.Remove(entity);
             newEntities.Remove(entity);
+            entity.DoRemovedFromGame();
             return entity;
         }
     }
