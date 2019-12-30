@@ -44,9 +44,15 @@ TagManager:
   - name: Ground
     uniqueID: 2670789215
     locked: 0
+  - name: Ball Shadow
+    uniqueID: 3275550705
+    locked: 0
   - name: Ball
     uniqueID: 1160116929
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Debug
+    uniqueID: 2526434397
     locked: 0

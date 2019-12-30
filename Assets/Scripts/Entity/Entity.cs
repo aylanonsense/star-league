@@ -71,7 +71,18 @@ namespace Game
             }
         }
 
-        public void DestroyOrReturnToPool()
+        public void AddToGame()
+        {
+            GameManager.Instance.AddEntityToGame(this);
+        }
+
+        public void RemoveFromGame()
+        {
+            GameManager.Instance.RemoveEntityFromGame(this);
+            gameObject.SetActive(false);
+        }
+
+        public void Destroy()
         {
             if (pool == null)
             {
@@ -86,18 +97,7 @@ namespace Game
             }
         }
 
-        public void AddToGame()
-        {
-            GameManager.Instance.AddEntityToGame(this);
-        }
-
-        public void RemoveFromGame()
-        {
-            GameManager.Instance.RemoveEntityFromGame(this);
-            gameObject.SetActive(false);
-        }
-
-        public static Entity CreateEntity(GameObject prefab, bool initialize = true)
+        public static Entity CreateEntity(GameObject prefab, bool addToGame = true, bool initialize = true)
         {
             GameObject gameObject = Instantiate(prefab);
             Entity entity = gameObject.GetComponent<Entity>();
@@ -106,7 +106,16 @@ namespace Game
             {
                 entity.DoInitialize();
             }
+            if (addToGame)
+            {
+                entity.AddToGame();
+            }
             return entity;
+        }
+
+        public static T CreateEntity<T>(GameObject prefab, bool addToGame = true, bool initialize = true) where T : Entity
+        {
+            return (T)CreateEntity(prefab, initialize);
         }
     }
 

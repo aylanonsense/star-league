@@ -4,19 +4,18 @@ using UnityEngine;
 
 namespace Game
 {
-    public class SpriteController : EntityComponent
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class SpriteController : BaseMonoBehaviour
     {
-        [SerializeField]
-        private GameObject spriteObject;
         [SerializeField]
         private SpriteSheet spriteSheet;
 
         private SpriteRenderer spriteRenderer;
         private Sprite[] sprites;
 
-        public override void Created()
+        private void Awake()
         {
-            spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             sprites = spriteSheet.GetSprites();
         }
 

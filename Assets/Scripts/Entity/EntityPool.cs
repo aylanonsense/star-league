@@ -16,14 +16,21 @@ namespace Game
             Create(initialAmount);
         }
 
-        public Entity Withdraw()
+        public T Withdraw<T>(bool addToGame = true, bool initialize = true) where T : Entity
         {
             if (entities.Count == 0)
             {
                 Create(1);
             }
-            Entity entity = entities.Dequeue();
-            entity.DoInitialize();
+            T entity = (T)entities.Dequeue();
+            if (initialize)
+            {
+                entity.DoInitialize();
+            }
+            if (addToGame)
+            {
+                entity.AddToGame();
+            }
             return entity;
         }
 
@@ -36,7 +43,7 @@ namespace Game
         {
             for (int i = 0; i < amount; i++)
             {
-                Entity entity = Entity.CreateEntity(prefab, false);
+                Entity entity = Entity.CreateEntity(prefab, false, false);
                 entity.pool = this;
                 Deposit(entity);
             }

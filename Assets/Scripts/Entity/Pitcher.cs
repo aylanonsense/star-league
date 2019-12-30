@@ -6,26 +6,42 @@ namespace Game
 {
     public class Pitcher : Entity
     {
-        //[SerializeField] private GameObject ballPrefab;
-        //private EntityPool balls;
-        //[SerializeField] private float timeBetweenBallSpawns = 1.00f;
-        //private float timeToNextBallSpawn;
+        [SerializeField]
+        private GameObject ballPrefab;
 
-        //private void Start()
-        //{
-            //balls = new EntityPool(ballPrefab);
-            //timeToNextBallSpawn = timeBetweenBallSpawns;
-        //}
+        private EntityPool balls;
 
-        //private void Update()
-        //{
-            //timeToNextBallSpawn -= Time.deltaTime;
-            //if (timeToNextBallSpawn <= 0.00f)
+        public override void Created()
+        {
+            balls = new EntityPool(ballPrefab);
+        }
+
+        public override void Initialize()
+        {
+            //for (int x = -15; x <= 15; x += 5)
             //{
-            //    timeToNextBallSpawn = timeBetweenBallSpawns;
-            //    GameObject ball = balls.Withdraw();
-            //    ball.transform.position = new Vector3(transform.position.x, 0.50f, transform.position.z);
+            //    for (int z = 0; z <= 100; z += 10)
+            //    {
+            //        Ball ball = balls.Withdraw<Ball>();
+            //        ball.gameObject.transform.position = new Vector3(x, 0, z);
+            //    }
             //}
-        //}
+            for (int z = -100; z <= 100; z += 20)
+            {
+                Ball ball = balls.Withdraw<Ball>();
+                ball.gameObject.transform.position = new Vector3(-10, 0, z);
+            }
+            //for (int x = -15; x <= 15; x += 30)
+            //{
+            //    for (int y = -15; y <= 15; y += 30)
+            //    {
+            //        for (int z = 0; z <= 100; z += 20)
+            //        {
+            //            Ball ball = balls.Withdraw<Ball>();
+            //            ball.gameObject.transform.position = new Vector3(x, y, z);
+            //        }
+            //    }
+            //}
+        }
     }
 }
