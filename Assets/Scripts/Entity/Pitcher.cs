@@ -30,7 +30,7 @@ namespace Game
             {
                 for (int y = -10; y <= 10; y += 20)
                 {
-                    for (int z = -1000; z <= 100; z += 200)
+                    for (int z = -1000; z <= 100; z += 100)
                     {
                         Ball ball = balls.Withdraw<Ball>();
                         ball.gameObject.transform.position = new Vector3(x, y, z);
