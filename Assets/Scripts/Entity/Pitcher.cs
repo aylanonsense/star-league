@@ -26,10 +26,16 @@ namespace Game
             //        ball.gameObject.transform.position = new Vector3(x, 0, z);
             //    }
             //}
-            for (int z = -100; z <= 100; z += 20)
+            for (int x = -10; x <= 10; x += 20)
             {
-                Ball ball = balls.Withdraw<Ball>();
-                ball.gameObject.transform.position = new Vector3(-10, 0, z);
+                for (int y = -10; y <= 10; y += 20)
+                {
+                    for (int z = -1000; z <= 100; z += 200)
+                    {
+                        Ball ball = balls.Withdraw<Ball>();
+                        ball.gameObject.transform.position = new Vector3(x, y, z);
+                    }
+                }
             }
             //for (int x = -15; x <= 15; x += 30)
             //{
