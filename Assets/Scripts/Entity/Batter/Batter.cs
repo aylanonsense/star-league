@@ -20,12 +20,11 @@ namespace Game
         public override void UpdateState()
         {
             stateMachine.Update();
-            strikeZone.SetAim(1, 1);
         }
 
-        public void Swing()
+        public void SetAim(int x, int y)
         {
-
+            strikeZone.SetAim(x, y);
         }
 
         private enum BatterState

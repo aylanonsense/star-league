@@ -9,7 +9,7 @@ namespace Game
         private static readonly float pitchersMoundPixelY = 25.5f;
         private static readonly float strikeZoneCenterPixelY = -32.0f;
         private static readonly float homePlatePixelY = -101.5f;
-        private static readonly float bottomOfScreenPixelY = -9999.0f;
+        private static readonly float minPixelY = -9999.0f;
         private static readonly float strikeZoneCellPixelWidth = 25.0f;
         private static readonly float strikeZoneCellPixelHeight = 25.0f;
 
@@ -67,16 +67,16 @@ namespace Game
             float vanishingPointPixelY = homePlatePixelY + (pitchersMoundPixelY - homePlatePixelY) / (1 - pitchersMoundRelativeSize);
 
             // Solve a system of equations to figure out how far we are from the "camera"
-            float a = ((vanishingPointPixelY - bottomOfScreenPixelY) / (vanishingPointPixelY - pitchersMoundPixelY) + (bottomOfScreenPixelY - vanishingPointPixelY) / (vanishingPointPixelY - homePlatePixelY)) / (pitchersMoundDepth - homePlateDepth);
-            float b = (vanishingPointPixelY - bottomOfScreenPixelY) / (vanishingPointPixelY - homePlatePixelY) - a * homePlateDepth;
-            float distanceFromCamera = a * z + b;
+            float a = ((vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - pitchersMoundPixelY) + (minPixelY - vanishingPointPixelY) / (vanishingPointPixelY - homePlatePixelY)) / (pitchersMoundDepth - homePlateDepth);
+            float b = (vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - homePlatePixelY) - a * homePlateDepth;
+            float distanceFromCamera = Mathf.Max(1.0f, a * z + b);
 
             // Using that we can determine the scale of things at that distance
             float scale = (a * homePlateDepth + b) / distanceFromCamera;
 
             // And from there we can figure out the pixel on the screen to use
             float pixelX = x * scale * strikeZoneCellPixelWidth / strikeZoneCellWidth;
-            float pixelY = vanishingPointPixelY - (vanishingPointPixelY - bottomOfScreenPixelY) / distanceFromCamera + (y - GroundY()) * scale * strikeZoneCellPixelHeight / strikeZoneCellHeight;
+            float pixelY = vanishingPointPixelY - (vanishingPointPixelY - minPixelY) / distanceFromCamera + (y - GroundY()) * scale * strikeZoneCellPixelHeight / strikeZoneCellHeight;
 
             // Return the pixel position and the scale at that distance
             return new Vector3(pixelX, pixelY, scale);
