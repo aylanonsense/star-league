@@ -9,6 +9,8 @@ namespace Game
         private readonly Queue<Entity> entities;
         private readonly GameObject prefab;
 
+        private bool isDestroyed = false;
+
         public EntityPool(GameObject prefab, int initialAmount = 0)
         {
             entities = new Queue<Entity>();
@@ -47,6 +49,25 @@ namespace Game
                 entity.pool = this;
                 Deposit(entity);
             }
+        }
+
+        public void Destroy()
+        {
+            isDestroyed = true;
+            foreach (Entity entity in entities)
+            {
+                entity.pool = null;
+                if (!entity.IsDestroyed())
+                {
+                    entity.Destroy();
+                }
+            }
+            entities.Clear();
+        }
+
+        public bool IsDestroyed()
+        {
+            return isDestroyed;
         }
     }
 }

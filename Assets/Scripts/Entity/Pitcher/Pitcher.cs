@@ -12,6 +12,7 @@ namespace Game
         private GameObject ballPrefab;
 
         private EntityPool balls;
+        private float timeUntilThrowBall;
 
         public override void Created()
         {
@@ -20,17 +21,26 @@ namespace Game
 
         public override void Initialize()
         {
-            //for (int x = -10; x <= 10; x += 20)
-            //{
-            //    for (int y = -10; y <= 10; y += 20)
-            //    {
-                    for (int z = 0; z <= 1000; z += 100)
-                    {
-                        Ball ball = balls.Withdraw<Ball>();
-                        ball.gameObject.transform.position = new Vector3(Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, z);
-                    }
-            //    }
-            //}
+            timeUntilThrowBall = 0.5f;
+        }
+
+        public override void UpdateState()
+        {
+            timeUntilThrowBall -= Time.deltaTime;
+            if (timeUntilThrowBall < 0.0f)
+            {
+                timeUntilThrowBall += 2.0f;
+                Ball ball = balls.Withdraw<Ball>();
+                ball.gameObject.transform.position = new Vector3(Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, 100.0f);
+            }
+        }
+
+        public override void Destroyed()
+        {
+            if (!balls.IsDestroyed())
+            {
+                balls.Destroy();
+            }
         }
     }
 }

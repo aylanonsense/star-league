@@ -11,6 +11,8 @@ namespace Game
         public EntityPool pool;
 
         private EntityComponent[] components;
+        private bool isAddedToGame = false;
+        private bool isDestroyed = false;
 
         public void DoCreated()
         {
@@ -32,6 +34,7 @@ namespace Game
 
         public void DoAddedToGame()
         {
+            isAddedToGame = true;
             gameObject.SetActive(true);
             foreach (EntityComponent component in components)
             {
@@ -65,6 +68,7 @@ namespace Game
 
         public void DoRemovedFromGame()
         {
+            isAddedToGame = false;
             foreach (EntityComponent component in components)
             {
                 component.RemovedFromGame();
@@ -84,8 +88,13 @@ namespace Game
 
         public void Destroy()
         {
-            if (pool == null)
+            if (isAddedToGame)
             {
+                RemoveFromGame();
+            }
+            if (pool == null || pool.IsDestroyed())
+            {
+                isDestroyed = true;
                 foreach (EntityComponent component in components)
                 {
                     component.Destroyed();
@@ -95,6 +104,16 @@ namespace Game
             {
                 pool.Deposit(this);
             }
+        }
+
+        public bool IsAddedToGame()
+        {
+            return isAddedToGame;
+        }
+
+        public bool IsDestroyed()
+        {
+            return isDestroyed;
         }
 
         public static Entity CreateEntity(GameObject prefab, bool addToGame = true, bool initialize = true)

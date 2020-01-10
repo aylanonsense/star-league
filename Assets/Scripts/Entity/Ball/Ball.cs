@@ -11,6 +11,10 @@ namespace Game
         public override void UpdateState()
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 100 * Time.deltaTime);
+            if (transform.position.z < -50.0f)
+            {
+                Destroy();
+            }
         }
     }
 }

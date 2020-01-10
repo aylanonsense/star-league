@@ -8,11 +8,13 @@ namespace Game
     {
         private List<Entity> entities;
         private List<Entity> newEntities;
+        private List<Entity> entitiesToRemove;
 
         private void Awake()
         {
             entities = new List<Entity>();
             newEntities = new List<Entity>();
+            entitiesToRemove = new List<Entity>();
             FindAndInitializeExistingEntities();
             AddNewEntitiesToGame();
         }
@@ -21,8 +23,9 @@ namespace Game
         {
             MakeDecisions();
             UpdateState();
-            PrepareToRender();
             AddNewEntitiesToGame();
+            RemoveEntitiesFromGame();
+            PrepareToRender();
         }
 
         private void FindAndInitializeExistingEntities()
@@ -70,6 +73,17 @@ namespace Game
             newEntities.Clear();
         }
 
+        private void RemoveEntitiesFromGame()
+        {
+            foreach (Entity entity in entitiesToRemove)
+            {
+                entities.Remove(entity);
+                newEntities.Remove(entity);
+                entity.DoRemovedFromGame();
+            }
+            entitiesToRemove.Clear();
+        }
+
         public Entity AddEntityToGame(Entity entity)
         {
             newEntities.Add(entity);
@@ -78,9 +92,7 @@ namespace Game
 
         public Entity RemoveEntityFromGame(Entity entity)
         {
-            entities.Remove(entity);
-            newEntities.Remove(entity);
-            entity.DoRemovedFromGame();
+            entitiesToRemove.Add(entity);
             return entity;
         }
     }
