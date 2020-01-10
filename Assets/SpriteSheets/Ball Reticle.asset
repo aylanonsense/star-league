@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40169e625892f4100a0273f86150f557, type: 3}
+  m_Name: Ball Reticle
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -900164328633084295, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 4629194779680584269, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 2104253039891010670, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 3434770712366441174, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -7940601655544898155, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 3775382439436927263, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -7241889730806553569, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 595787091901058638, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 6421161427331701936, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -846946194862194588, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -8115091596665693765, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: 931649773855361878, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -691858710507365387, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}
+  - {fileID: -5569047347156895114, guid: 7226bea77e5754eb5a4e304e3c0f0445, type: 3}

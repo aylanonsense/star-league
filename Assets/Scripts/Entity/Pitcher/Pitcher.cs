@@ -24,11 +24,10 @@ namespace Game
             //{
             //    for (int y = -10; y <= 10; y += 20)
             //    {
-                    for (int z = 0; z <= 200; z += 50)
+                    for (int z = 0; z <= 1000; z += 100)
                     {
                         Ball ball = balls.Withdraw<Ball>();
-                        //ball.gameObject.transform.position = new Vector3(Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10, Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10, z);
-                        ball.gameObject.transform.position = new Vector3(10.0f, 10.0f, z);
+                        ball.gameObject.transform.position = new Vector3(Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, Mathf.FloorToInt(Random.Range(0, 3) - 1) * 10.0f, z);
                     }
             //    }
             //}

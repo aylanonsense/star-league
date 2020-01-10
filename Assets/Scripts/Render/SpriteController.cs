@@ -31,5 +31,15 @@ namespace Game
         {
             spriteRenderer.sprite = sprites[index];
         }
+
+        public void Show()
+        {
+            spriteRenderer.enabled = true;
+        }
+
+        public void Hide()
+        {
+            spriteRenderer.enabled = false;
+        }
     }
 }
