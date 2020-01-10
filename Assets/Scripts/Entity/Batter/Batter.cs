@@ -8,6 +8,8 @@ namespace Game
     {
         public new readonly EntityType type = EntityType.Batter;
 
+        [SerializeField] private StrikeZone strikeZone;
+
         private StateMachine<BatterState> stateMachine;
 
         public override void Initialize()
@@ -18,6 +20,7 @@ namespace Game
         public override void UpdateState()
         {
             stateMachine.Update();
+            strikeZone.SetAim(1, 1);
         }
 
         public void Swing()

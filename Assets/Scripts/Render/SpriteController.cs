@@ -16,7 +16,10 @@ namespace Game
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            sprites = spriteSheet.GetSprites();
+            if (spriteSheet != null)
+            {
+                sprites = spriteSheet.GetSprites();
+            }
         }
 
         public int GetNumSprites()

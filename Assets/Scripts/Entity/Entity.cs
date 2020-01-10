@@ -124,6 +124,7 @@ namespace Game
         None,
         Batter,
         Pitcher,
-        Ball
+        Ball,
+        StrikeZone
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
+    [RequireComponent(typeof(Entity))]
     public abstract class EntityComponent : BaseMonoBehaviour
     {
         // Called once as soon as the object is created
