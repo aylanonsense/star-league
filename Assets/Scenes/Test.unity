@@ -316,6 +316,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 1582452682238155093, guid: 9df0d6d388760449abbcceac83bf5a51,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1582452682238155094, guid: 9df0d6d388760449abbcceac83bf5a51,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,6 +458,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1864435579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864435581}
+  - component: {fileID: 1864435580}
+  m_Layer: 0
+  m_Name: Line Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1864435580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864435579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198c156033e1742ca9e824dac06f738c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p0: {x: -4.398976, y: -15.884506, z: 3}
+  p1: {x: 41.453663, y: 3.7140198, z: 3}
+--- !u!4 &1864435581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864435579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.02, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2152154114130515956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,6 +514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Strike Zone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488350274344138785, guid: 6b0a950d06cf242b981c9abd589dd398,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 525774417556473628, guid: 6b0a950d06cf242b981c9abd589dd398,
         type: 3}
@@ -546,6 +601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Batter
       objectReference: {fileID: 0}
+    - target: {fileID: 7751917398180190877, guid: 19b653d84c4a44cbaa233455f6686ce5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8533344153345699155, guid: 19b653d84c4a44cbaa233455f6686ce5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -599,6 +659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Pitcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663409819466462302, guid: 32d8a6206e1a148c58c2da237d3b8b30,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2459751363747992259, guid: 32d8a6206e1a148c58c2da237d3b8b30,
         type: 3}
