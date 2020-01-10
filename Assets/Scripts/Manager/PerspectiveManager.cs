@@ -7,7 +7,7 @@ namespace Game
     public static class PerspectiveManager
     {
         private static readonly float pitchersMoundPixelY = 25.5f;
-        private static readonly float strikeZoneCenterPixelY = -32.0f;
+        private static readonly float strikeZoneCenterPixelY = -46.0f;
         private static readonly float homePlatePixelY = -101.5f;
         private static readonly float minPixelY = -9999.0f;
         private static readonly float strikeZoneCellPixelWidth = 25.0f;
@@ -18,7 +18,7 @@ namespace Game
         private static readonly float strikeZoneCellWidth = 10.0f;
         private static readonly float strikeZoneCellHeight = 10.0f;
 
-        private static readonly float pitchersMoundRelativeSize = 0.35f;
+        private static readonly float pitchersMoundRelativeSize = 0.2f;
 
         /* Perspective units
          * z = 0 is where the batter is standing

@@ -11,18 +11,18 @@ namespace Game
         [SerializeField] private SpriteController gridSprite;
         [SerializeField] private SpriteController reticleSprite;
 
-        private int aimX = 0;
-        private int aimY = 0;
+        private int reticleX = 0;
+        private int reticleY = 0;
 
-        public void SetAim(int x, int y)
+        public void SetReticle(int x, int y)
         {
-            aimX = x;
-            aimY = y;
+            reticleX = x;
+            reticleY = y;
         }
 
         public override void PrepareToRender()
         {
-            reticleSprite.transform.localPosition = new Vector3(25.0f * aimX, 25.0f * aimY, 0.0f);
+            reticleSprite.transform.localPosition = new Vector3(25.0f * reticleX, 25.0f * reticleY, 0.0f);
         }
     }
 }

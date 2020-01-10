@@ -9,12 +9,14 @@ namespace Game
         private List<Entity> entities;
         private List<Entity> newEntities;
         private List<Entity> entitiesToRemove;
+        private Dictionary<EntityType, List<Entity>> entitiesByType;
 
         private void Awake()
         {
             entities = new List<Entity>();
             newEntities = new List<Entity>();
             entitiesToRemove = new List<Entity>();
+            entitiesByType = new Dictionary<EntityType, List<Entity>>();
             FindAndInitializeExistingEntities();
             AddNewEntitiesToGame();
         }
@@ -55,6 +57,14 @@ namespace Game
             }
         }
 
+        private void CheckInteractions()
+        {
+            foreach (Entity entity in entities)
+            {
+                entity.DoCheckInteractions();
+            }
+        }
+
         private void PrepareToRender()
         {
             foreach (Entity entity in entities)
@@ -68,6 +78,7 @@ namespace Game
             foreach (Entity entity in newEntities)
             {
                 entities.Add(entity);
+                GetEntitiesOfType(entity.type).Add(entity);
                 entity.DoAddedToGame();
             }
             newEntities.Clear();
@@ -79,9 +90,19 @@ namespace Game
             {
                 entities.Remove(entity);
                 newEntities.Remove(entity);
+                GetEntitiesOfType(entity.type).Remove(entity);
                 entity.DoRemovedFromGame();
             }
             entitiesToRemove.Clear();
+        }
+
+        public List<Entity> GetEntitiesOfType(EntityType type)
+        {
+            if (!entitiesByType.ContainsKey(type))
+            {
+                entitiesByType[type] = new List<Entity>();
+            }
+            return entitiesByType[type];
         }
 
         public Entity AddEntityToGame(Entity entity)

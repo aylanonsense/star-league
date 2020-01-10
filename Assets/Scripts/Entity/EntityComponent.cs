@@ -22,6 +22,9 @@ namespace Game
         // Called once per frame, this is the time to update the entity's state
         public virtual void UpdateState() { }
 
+        // Called once per frame, this is the time to compare entities to each other
+        public virtual void CheckInteractions() { }
+
         // Called once per frame, this is where the entity can prepare itself for rendering
         public virtual void PrepareToRender() { }
 

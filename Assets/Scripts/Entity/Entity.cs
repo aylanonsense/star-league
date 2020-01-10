@@ -58,6 +58,14 @@ namespace Game
             }
         }
 
+        public void DoCheckInteractions()
+        {
+            foreach (EntityComponent component in components)
+            {
+                component.CheckInteractions();
+            }
+        }
+
         public void DoPrepareToRender()
         {
             foreach (EntityComponent component in components)

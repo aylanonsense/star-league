@@ -22,9 +22,25 @@ namespace Game
             stateMachine.Update();
         }
 
+        public override void CheckInteractions()
+        {
+            //List<Entity> balls = GameManager.Instance.GetEntitiesOfType(EntityType.Ball);
+            //int i = 1;
+            //foreach (Ball ball in balls)
+            //{
+            //    i++;
+            //    Debug.Log("a " + i);
+            //}
+        }
+
         public void SetAim(int x, int y)
         {
-            strikeZone.SetAim(x, y);
+            strikeZone.SetReticle(x, y);
+        }
+
+        public void Swing(int x, int y)
+        {
+            stateMachine.SetState(BatterState.Swinging);
         }
 
         private enum BatterState
