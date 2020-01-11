@@ -16,8 +16,10 @@ namespace Game
             None,
             Point,
             Ground,
-            AnchorIn,
-            AnchorOut
+            AnchorInPoint,
+            AnchorInGround,
+            AnchorOutPoint,
+            AnchorOutGround
         }
 
         public void OnSceneGUI(SceneView sceneView)
@@ -89,8 +91,6 @@ namespace Game
                         Vector3 newPixelPosition = Handles.DoPositionHandle(pixelPosition, Quaternion.identity);
                         if (EditorGUI.EndChangeCheck())
                         {
-                            //spline.SetControlPoint(index, handleTransform.InverseTransformPoint(point));
-                            //point
                             point.position = PerspectiveManager.ToPerspective(newPixelPosition.x, newPixelPosition.y, position.z);
                             Undo.RecordObject(path, "Move Point");
                             EditorUtility.SetDirty(path);
@@ -98,7 +98,16 @@ namespace Game
                     }
                     else if (selectionType == SelectionType.Ground)
                     {
+                        EditorGUI.BeginChangeCheck();
                         Vector3 newPixelPosition = Handles.DoPositionHandle(groundPixelPosition, Quaternion.identity);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            float depth = PerspectiveManager.ToPerspectiveDepth(newPixelPosition.y);
+                            Vector3 newGroundPosition = PerspectiveManager.ToPerspective(newPixelPosition.x, newPixelPosition.y, depth);
+                            point.position = new Vector3(newGroundPosition.x, position.y, newGroundPosition.z);
+                            Undo.RecordObject(path, "Move Point");
+                            EditorUtility.SetDirty(path);
+                        }
                     }
                 }
 

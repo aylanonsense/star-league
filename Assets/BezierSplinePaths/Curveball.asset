@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Curveball
   m_EditorClassIdentifier: 
   points:
-  - position: {x: 0, y: 4.88, z: 100}
+  - position: {x: 0, y: 0, z: 100}
     anchorIn: {x: 0, y: 0, z: 110}
     anchorOut: {x: 0, y: 0, z: 0}
-  - position: {x: -26, y: -12.49, z: 50}
+  - position: {x: 41.717384, y: 6.4124656, z: 31.550375}
     anchorIn: {x: 0, y: 0, z: 60}
     anchorOut: {x: 0, y: 0, z: 0}
   - position: {x: 0, y: 0, z: 0}
