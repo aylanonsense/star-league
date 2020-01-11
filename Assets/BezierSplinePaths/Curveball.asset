@@ -19,6 +19,6 @@ MonoBehaviour:
   - position: {x: 41.717384, y: 6.4124656, z: 31.550375}
     anchorIn: {x: 0, y: 0, z: 60}
     anchorOut: {x: 0, y: 0, z: 0}
-  - position: {x: 0, y: 0, z: 0}
+  - position: {x: 5.399039, y: 0, z: 0.08856907}
     anchorIn: {x: 0, y: 0, z: 10}
     anchorOut: {x: 0, y: 0, z: 0}

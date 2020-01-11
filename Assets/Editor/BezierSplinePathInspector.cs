@@ -82,6 +82,24 @@ namespace Game
                     Repaint();
                 }
 
+                // Draw a handle at the anchor out position
+                Vector3 anchorPixelCoordinates = PerspectiveManager.ToPixels(point.anchorOut);
+                Vector3 anchorPixelPosition = new Vector3(anchorPixelCoordinates.x, anchorPixelCoordinates.y, 0.0f);
+                Vector3 anchorGroundPixelCoordinates = PerspectiveManager.ToPixels(point.anchorOut.x, PerspectiveManager.GroundY(), point.anchorOut.z);
+                Vector3 anchorGroundPixelPosition = new Vector3(anchorGroundPixelCoordinates.x, anchorGroundPixelCoordinates.y, -10.0f);
+                float anchorPixelScale = anchorPixelCoordinates.z;
+                float anchorRadius = 15.0f * anchorPixelScale / 2;
+                Handles.color = Color.magenta;
+                Handles.DrawLine(anchorPixelPosition, anchorGroundPixelPosition);
+                if (Handles.Button(anchorGroundPixelPosition, Quaternion.identity, 2.0f, 4.0f, Handles.DotHandleCap))
+                {
+
+                }
+                if (Handles.Button(anchorPixelPosition, Quaternion.identity, 2.0f, 4.0f, Handles.DotHandleCap))
+                {
+
+                }
+
                 // Draw the position handle so the user can change any aspect of a point
                 if (isSelected)
                 {

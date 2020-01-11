@@ -30,7 +30,7 @@ namespace Game
         {
             this.position = position;
             anchorIn = new Vector3(position.x, position.y, position.z - 10.0f);
-            anchorIn = new Vector3(position.x, position.y, position.z + 10.0f);
+            anchorOut = new Vector3(position.x, position.y, position.z + 10.0f);
         }
     }
 }
