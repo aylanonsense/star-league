@@ -14,6 +14,7 @@ namespace Game
         {
             points = new List<BezierSplinePoint>();
             points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 100.0f)));
+            points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 50.0f)));
             points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 0.0f)));
         }
     }

@@ -9,6 +9,16 @@ namespace Game
     public class BezierSplinePathInspector : Editor
     {
         private int selectedPointIndex = -1;
+        private SelectionType selectionType = SelectionType.None;
+
+        private enum SelectionType
+        {
+            None,
+            Point,
+            Ground,
+            AnchorIn,
+            AnchorOut
+        }
 
         public void OnSceneGUI(SceneView sceneView)
         {
@@ -24,6 +34,8 @@ namespace Game
                 }, new Color(0.0f, 0.0f, 0.0f, 0.5f), new Color(0.0f, 0.0f, 0.0f, 0.0f));
 
             // Iterate through the list of points
+            BezierSplinePoint prevPoint = null;
+            Vector3 prevPixelPosition = Vector3.zero;
             for (int i = 0; i < points.Count; i++)
             {
                 BezierSplinePoint point = points[i];
@@ -38,8 +50,14 @@ namespace Game
                 float pixelScale = pixelCoordinates.z;
                 float radius = 15.0f * pixelScale / 2;
 
+                // Draw a line from this point to the previous point
+                if (prevPoint != null)
+                {
+                    Handles.color = Color.cyan;
+                    Handles.DrawLine(prevPixelPosition, pixelPosition);
+                }
+
                 // Draw a circle representing where the ball will be at this point
-                //Handles.color = isSelected ? new Color(1.0f, 1.0f, 0.0f, 1.0f) : new Color(1.0f, 1.0f, 1.0f, 0.35f);
                 Handles.color = isSelected ? Color.yellow : Color.white;
                 Handles.DrawSolidDisc(pixelPosition, Vector3.back, radius);
 
@@ -50,52 +68,65 @@ namespace Game
                 if (Handles.Button(pixelPosition, Quaternion.identity, radius, Mathf.Max(4.0f, 15.0f * pixelScale + 2.0f), Handles.CircleHandleCap))
                 {
                     selectedPointIndex = i;
+                    selectionType = SelectionType.Point;
+                    Repaint();
                 }
 
                 // Draw a button where the ground under the ball is
                 if (Handles.Button(groundPixelPosition, Quaternion.identity, radius / 2, radius / 2 + 2.0f, Handles.DotHandleCap))
                 {
                     selectedPointIndex = i;
+                    selectionType = SelectionType.Ground;
+                    Repaint();
                 }
+
+                // Draw the position handle so the user can change any aspect of a point
+                if (isSelected)
+                {
+                    if (selectionType == SelectionType.Point)
+                    {
+                        EditorGUI.BeginChangeCheck();
+                        Vector3 newPixelPosition = Handles.DoPositionHandle(pixelPosition, Quaternion.identity);
+                        if (EditorGUI.EndChangeCheck())
+                        {
+                            //spline.SetControlPoint(index, handleTransform.InverseTransformPoint(point));
+                            //point
+                            point.position = PerspectiveManager.ToPerspective(newPixelPosition.x, newPixelPosition.y, position.z);
+                            Undo.RecordObject(path, "Move Point");
+                            EditorUtility.SetDirty(path);
+                        }
+                    }
+                    else if (selectionType == SelectionType.Ground)
+                    {
+                        Vector3 newPixelPosition = Handles.DoPositionHandle(groundPixelPosition, Quaternion.identity);
+                    }
+                }
+
+                prevPoint = point;
+                prevPixelPosition = pixelPosition;
             }
-
-            //Vector3[] points = path.points;
-            //Debug.Log("pointsz " + (points == null));
-            //Debug.Log("Hello");
-
-            //foreach (BezierSplinePoint point in points)
-            //{
-            //    Vector3 position = point.position;
-            //    Handles.color = Color.magenta;
-            //    Handles.Button(position, Quaternion.identity, 10.0f, 12.0f, Handles.CircleCap);
-
-            //if (Handles.Button(point, handleRotation, size * handleSize, size * pickSize, Handles.DotCap))
-            //{
-            //    selectedIndex = index;
-            //    Repaint();
-            //}
-            //if (selectedIndex == index)
-            //{
-            //    EditorGUI.BeginChangeCheck();
-            //    point = Handles.DoPositionHandle(point, handleRotation);
-            //    if (EditorGUI.EndChangeCheck())
-            //    {
-            //        Undo.RecordObject(spline, "Move Point");
-            //        EditorUtility.SetDirty(spline);
-            //        spline.SetControlPoint(index, handleTransform.InverseTransformPoint(point));
-            //    }
-            //}
-            //return point;
-            //}
-
-            //Handles.color = Color.white;
-            //Handles.DrawLine(new Vector3(-30.0f, 0.0f, 0.0f), new Vector3(0.0f, 20.0f, 0.0f));
         }
 
         public override void OnInspectorGUI()
         {
             BezierSplinePath path = target as BezierSplinePath;
+
+            // Draw the normal fields and such
             DrawDefaultInspector();
+
+            // Draw controls for the currently-selected point
+            if (selectedPointIndex >= 0)
+            {
+                GUILayout.Label("Selected Point");
+                if (GUILayout.Button("Add Point"))
+                {
+                    // TODO
+                }
+                if (GUILayout.Button("Delete Point"))
+                {
+                    // TODO
+                }
+            }
         }
 
         protected void OnEnable()
@@ -106,6 +137,8 @@ namespace Game
         protected void OnDisable()
         {
             SceneView.duringSceneGui -= OnSceneGUI;
+            selectedPointIndex = -1;
+            selectionType = SelectionType.None;
         }
     }
 }

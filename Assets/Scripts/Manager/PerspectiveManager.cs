@@ -51,21 +51,31 @@ namespace Game
             return (homePlatePixelY - strikeZoneCenterPixelY) * strikeZoneCellHeight / strikeZoneCellPixelHeight;
         }
 
+        // Convert from a pixel y value to a perspective depth value
         public static float ToPerspectiveDepth(float pixelY)
         {
+            // TODO
             return 0.0f;
         }
 
-        public static Vector4 ToPerspective(float pixelX, float pixelY, float depth)
+        // Convert from <x, y> screen pixels to a 3D <x, y, z> vector
+        public static Vector3 ToPerspective(float pixelX, float pixelY, float depth)
         {
-            return new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+            Vector3 pixelBaseline = ToPixels(0.0f, 0.0f, depth);
+            float scale = pixelBaseline.z;
+            float dx = pixelX - pixelBaseline.x;
+            float dy = pixelY - pixelBaseline.y;
+            float x = dx * (strikeZoneCellWidth / strikeZoneCellPixelWidth) / scale;
+            float y = dy * (strikeZoneCellHeight / strikeZoneCellPixelHeight) / scale;
+            float z = depth;
+            return new Vector3(x, y, z);
         }
 
+        // Convert from a 3D <x, y, z> vector to <x, y> screen pixels
         public static Vector3 ToPixels(Vector3 position)
         {
             return ToPixels(position.x, position.y, position.z);
         }
-
         public static Vector3 ToPixels(float x, float y, float z)
         {
             // Figure out the vanishing point of this perspective
