@@ -61,6 +61,11 @@ namespace Game
             return new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
         }
 
+        public static Vector3 ToPixels(Vector3 position)
+        {
+            return ToPixels(position.x, position.y, position.z);
+        }
+
         public static Vector3 ToPixels(float x, float y, float z)
         {
             // Figure out the vanishing point of this perspective

@@ -7,8 +7,7 @@ namespace Game
     [CreateAssetMenu]
     public class SpriteSheet : ScriptableObject
     {
-        [SerializeField]
-        private Sprite[] sprites;
+        [SerializeField] private Sprite[] sprites;
 
         public Sprite[] GetSprites()
         {
