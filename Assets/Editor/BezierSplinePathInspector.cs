@@ -33,6 +33,21 @@ namespace Game
                     new Vector3(128.0f, -120.0f, 0.0f),
                 }, new Color(0.0f, 0.0f, 0.0f, 0.7f), new Color(0.0f, 0.0f, 0.0f, 0.0f));
 
+            // Draw the bezier curve
+            Handles.color = Color.cyan;
+            Vector3 prevBezierPixelPosition = Vector3.zero;
+            for (float t = 0.0f; t <= 1.0f; t += 0.001f)
+            {
+                Vector3 bezierPosition = path.GetPosition(t);
+                Vector3 bezierPixelPosition = PerspectiveManager.ToPixels(bezierPosition);
+                bezierPixelPosition.z = 0.0f;
+                if (t > 0.0f)
+                {
+                    Handles.DrawLine(prevBezierPixelPosition, bezierPixelPosition);
+                }
+                prevBezierPixelPosition = bezierPixelPosition;
+            }
+
             // Iterate through the list of points
             BezierSplinePoint prevPoint = null;
             Vector3 prevPixelPosition = Vector3.zero;
@@ -46,13 +61,6 @@ namespace Game
                 Vector3 groundPixelPosition = ToGroundPixels(point.position);
                 float scale = ToScale(point.position);
                 float radius = 15.0f * scale / 2;
-
-                // Draw a line from this point to the previous point
-                if (prevPoint != null)
-                {
-                    Handles.color = Color.cyan;
-                    Handles.DrawLine(prevPixelPosition, pixelPosition);
-                }
 
                 if (isSelected)
                 {
@@ -185,12 +193,12 @@ namespace Game
                         else if (selectedPointType == SelectedPointType.AnchorIn)
                         {
                             point.anchorIn = newPosition;
-                            point.anchorOut = point.position - 2 * diff;
+                            point.anchorOut = point.position - diff;
                         }
                         else
                         {
                             point.anchorOut = newPosition;
-                            point.anchorIn = point.position - 2 * diff;
+                            point.anchorIn = point.position - diff;
                         }
                         Undo.RecordObject(path, "Move Point");
                         EditorUtility.SetDirty(path);
@@ -212,14 +220,20 @@ namespace Game
             // Draw controls for the currently-selected point
             if (selectedPointIndex >= 0)
             {
-                GUILayout.Label("Selected Point");
+                BezierSplinePoint selectedPoint = path.points[selectedPointIndex];
                 if (GUILayout.Button("Add Point"))
                 {
-                    // TODO
+                    path.points.Insert(selectedPointIndex + 1, new BezierSplinePoint(new Vector3(selectedPoint.position.x, selectedPoint.position.y, selectedPoint.position.z - 10.0f)));
+                    selectedPointIndex += 1;
+                    Undo.RecordObject(path, "Add Point");
+                    EditorUtility.SetDirty(path);
                 }
                 if (GUILayout.Button("Delete Point"))
                 {
-                    // TODO
+                    path.points.RemoveAt(selectedPointIndex);
+                    selectedPointIndex -= 1;
+                    Undo.RecordObject(path, "Delete Point");
+                    EditorUtility.SetDirty(path);
                 }
             }
         }

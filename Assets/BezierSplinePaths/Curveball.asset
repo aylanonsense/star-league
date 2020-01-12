@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Curveball
   m_EditorClassIdentifier: 
   points:
-  - position: {x: -24.543903, y: 92.600235, z: 39.60655}
-    anchorIn: {x: -24.543903, y: 92.600235, z: 49.606552}
-    anchorOut: {x: -24.543903, y: 92.600235, z: 29.606548}
-  - position: {x: 54.138435, y: 0, z: 50}
-    anchorIn: {x: 54.138435, y: 0, z: 60}
-    anchorOut: {x: 54.138435, y: 0, z: 40}
-  - position: {x: -42.740868, y: 0, z: 0}
-    anchorIn: {x: -42.740868, y: 0, z: 10}
-    anchorOut: {x: -42.740868, y: 0, z: -10}
+  - position: {x: -95.52893, y: 0, z: 100}
+    anchorIn: {x: -205.52144, y: 0, z: 180}
+    anchorOut: {x: 124.456085, y: 0, z: -60}
+  - position: {x: 0, y: 0, z: 0}
+    anchorIn: {x: 0, y: 0, z: 10}
+    anchorOut: {x: 0, y: 0, z: -10}

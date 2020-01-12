@@ -12,10 +12,26 @@ namespace Game
 
         public void Reset()
         {
-            points = new List<BezierSplinePoint>();
-            points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 100.0f)));
-            points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 50.0f)));
-            points.Add(new BezierSplinePoint(new Vector3(0.0f, 0.0f, 0.0f)));
+            points = new List<BezierSplinePoint>
+            {
+                new BezierSplinePoint(new Vector3(0.0f, 0.0f, 100.0f)),
+                new BezierSplinePoint(new Vector3(0.0f, 0.0f, 0.0f))
+            };
+        }
+
+        public Vector3 GetPosition(float t)
+        {
+            t = Mathf.Clamp01(t);
+            int numCurves = points.Count - 1;
+            int curveNumber = (int)Mathf.Clamp(Mathf.Floor(t * numCurves), 0, numCurves - 1);
+            BezierSplinePoint startPoint = points[curveNumber];
+            BezierSplinePoint endPoint = points[curveNumber + 1];
+            float p = (t - ((float)curveNumber / numCurves)) * numCurves;
+            float q = 1.0f - p;
+            return q * q * q * startPoint.position
+                + q * q * p * startPoint.anchorOut * 3.0f
+                + q * p * p * endPoint.anchorIn * 3.0f
+                + p * p * p * endPoint.position;
         }
     }
 
