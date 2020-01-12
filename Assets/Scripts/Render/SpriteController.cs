@@ -7,8 +7,7 @@ namespace Game
     [RequireComponent(typeof(SpriteRenderer))]
     public class SpriteController : BaseMonoBehaviour
     {
-        [SerializeField]
-        private SpriteSheet spriteSheet;
+        [SerializeField] private SpriteSheet spriteSheet = default;
 
         private SpriteRenderer spriteRenderer;
         private Sprite[] sprites;

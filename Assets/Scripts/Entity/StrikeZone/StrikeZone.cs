@@ -8,8 +8,8 @@ namespace Game
     {
         public new readonly EntityType type = EntityType.StrikeZone;
 
-        [SerializeField] private SpriteController gridSprite;
-        [SerializeField] private SpriteController reticleSprite;
+        [SerializeField] private SpriteController gridSprite = default;
+        [SerializeField] private SpriteController reticleSprite = default;
 
         private int reticleX = 0;
         private int reticleY = 0;

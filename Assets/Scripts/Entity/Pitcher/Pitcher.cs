@@ -8,8 +8,7 @@ namespace Game
     {
         public new readonly EntityType type = EntityType.Pitcher;
 
-        [SerializeField]
-        private GameObject ballPrefab;
+        [SerializeField] private GameObject ballPrefab = default;
 
         private EntityPool balls;
         private float timeUntilThrowBall;

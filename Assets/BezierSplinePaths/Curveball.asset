@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ca0009cb05049b49fff548fd4c0c7d, type: 3}
+  m_Name: Curveball
+  m_EditorClassIdentifier: 
+  points:
+  - anchorIn: {x: 36.94322, y: 0, z: 104.84322}
+    position: {x: 0, y: 0, z: 100}
+    anchorOut: {x: -36.94322, y: 0, z: 95.15678}
+  - anchorIn: {x: -44.74142, y: 0, z: 53.329353}
+    position: {x: -39.599655, y: 0, z: 35.54672}
+    anchorOut: {x: -34.45789, y: 0, z: 17.764084}
+  - anchorIn: {x: -15.486082, y: -0.18088591, z: 3.6385813}
+    position: {x: 0, y: 0, z: 0}
+    anchorOut: {x: 15.486082, y: 0.18088591, z: -3.6385813}

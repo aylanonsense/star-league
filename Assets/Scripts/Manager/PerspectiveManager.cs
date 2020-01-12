@@ -46,21 +46,56 @@ namespace Game
          * y = -120 is the bottom of the screen
          */
 
+
+        // Get the perspective y value of the surface of the ground
         public static float GroundY()
         {
             return (homePlatePixelY - strikeZoneCenterPixelY) * strikeZoneCellHeight / strikeZoneCellPixelHeight;
         }
 
+        // Convert from a pixel y value to a perspective depth value
         public static float ToPerspectiveDepth(float pixelY)
         {
-            return 0.0f;
-        }
+            // Figure out the vanishing point of this perspective
+            float vanishingPointPixelY = homePlatePixelY + (pitchersMoundPixelY - homePlatePixelY) / (1 - pitchersMoundRelativeSize);
 
-        public static Vector4 ToPerspective(float pixelX, float pixelY, float depth)
+            // Solve a system of equations to figure out how far we are from the "camera"
+            float a = ((vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - pitchersMoundPixelY) + (minPixelY - vanishingPointPixelY) / (vanishingPointPixelY - homePlatePixelY)) / (pitchersMoundDepth - homePlateDepth);
+            float b = (vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - homePlatePixelY) - a * homePlateDepth;
+
+            // Return the z value of the ground at that pixel y value
+            return ((minPixelY - vanishingPointPixelY) / (pixelY - vanishingPointPixelY) - b) / a;
+        }
+        
+        public static float DistanceFromCameraTest(float x, float y, float z)
         {
-            return new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+            // Figure out the vanishing point of this perspective
+            float vanishingPointPixelY = homePlatePixelY + (pitchersMoundPixelY - homePlatePixelY) / (1 - pitchersMoundRelativeSize);
+
+            // Solve a system of equations to figure out how far we are from the "camera"
+            float a = ((vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - pitchersMoundPixelY) + (minPixelY - vanishingPointPixelY) / (vanishingPointPixelY - homePlatePixelY)) / (pitchersMoundDepth - homePlateDepth);
+            float b = (vanishingPointPixelY - minPixelY) / (vanishingPointPixelY - homePlatePixelY) - a * homePlateDepth;
+            return Mathf.Max(1.0f, a * z + b);
         }
 
+            // Convert from <x, y> screen pixels to a 3D <x, y, z> vector
+            public static Vector3 ToPerspective(float pixelX, float pixelY, float depth)
+        {
+            Vector3 pixelBaseline = ToPixels(0.0f, 0.0f, depth);
+            float scale = pixelBaseline.z;
+            float dx = pixelX - pixelBaseline.x;
+            float dy = pixelY - pixelBaseline.y;
+            float x = dx * (strikeZoneCellWidth / strikeZoneCellPixelWidth) / scale;
+            float y = dy * (strikeZoneCellHeight / strikeZoneCellPixelHeight) / scale;
+            float z = depth;
+            return new Vector3(x, y, z);
+        }
+
+        // Convert from a 3D <x, y, z> vector to <x, y> screen pixels
+        public static Vector3 ToPixels(Vector3 position)
+        {
+            return ToPixels(position.x, position.y, position.z);
+        }
         public static Vector3 ToPixels(float x, float y, float z)
         {
             // Figure out the vanishing point of this perspective

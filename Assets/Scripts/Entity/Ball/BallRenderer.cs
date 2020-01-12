@@ -6,9 +6,9 @@ namespace Game
 {
     public class BallRenderer : EntityComponent
     {
-        [SerializeField] private SpriteController ballSprite;
-        [SerializeField] private SpriteController ballShadowSprite;
-        [SerializeField] private SpriteController ballReticleSprite;
+        [SerializeField] private SpriteController ballSprite = default;
+        [SerializeField] private SpriteController ballShadowSprite = default;
+        [SerializeField] private SpriteController ballReticleSprite = default;
 
         public override void PrepareToRender()
         {

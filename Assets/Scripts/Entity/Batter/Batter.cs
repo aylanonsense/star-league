@@ -8,7 +8,7 @@ namespace Game
     {
         public new readonly EntityType type = EntityType.Batter;
 
-        [SerializeField] private StrikeZone strikeZone;
+        [SerializeField] private StrikeZone strikeZone = default;
 
         private StateMachine<BatterState> stateMachine;
 
