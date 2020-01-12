@@ -89,7 +89,7 @@ namespace Game
             }
             EditorGUI.BeginChangeCheck();
             BezierControlPointMode mode = (BezierControlPointMode)
-                EditorGUILayout.EnumPopup("Mode", spline.GetControlPointMode(selectedIndex));
+            EditorGUILayout.EnumPopup("Mode", spline.GetControlPointMode(selectedIndex));
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(spline, "Change Point Mode");

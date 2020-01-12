@@ -29,8 +29,8 @@ namespace Game
         public BezierSplinePoint(Vector3 position)
         {
             this.position = position;
-            anchorIn = new Vector3(position.x, position.y, position.z - 10.0f);
-            anchorOut = new Vector3(position.x, position.y, position.z + 10.0f);
+            anchorIn = new Vector3(position.x, position.y, position.z + 10.0f);
+            anchorOut = new Vector3(position.x, position.y, position.z - 10.0f);
         }
     }
 }
