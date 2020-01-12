@@ -29,8 +29,8 @@ namespace Game
             float p = (t - ((float)curveNumber / numCurves)) * numCurves;
             float q = 1.0f - p;
             return q * q * q * startPoint.position
-                + q * q * p * startPoint.anchorOut * 3.0f
-                + q * p * p * endPoint.anchorIn * 3.0f
+                + q * q * p * (startPoint.position + startPoint.anchorOut) * 3.0f
+                + q * p * p * (endPoint.position + endPoint.anchorIn) * 3.0f
                 + p * p * p * endPoint.position;
         }
     }
@@ -38,15 +38,17 @@ namespace Game
     [Serializable]
     public class BezierSplinePoint
     {
-        public Vector3 anchorIn;
         public Vector3 position;
+        public Vector3 anchorIn;
         public Vector3 anchorOut;
+        public bool mirrorAnchors;
 
         public BezierSplinePoint(Vector3 position)
         {
             this.position = position;
-            anchorIn = new Vector3(position.x, position.y, position.z + 10.0f);
-            anchorOut = new Vector3(position.x, position.y, position.z - 10.0f);
+            anchorIn = new Vector3(0.0f, 0.0f, 10.0f);
+            anchorOut = new Vector3(0.0f, 0.0f, -10.0f);
+            mirrorAnchors = true;
         }
     }
 }

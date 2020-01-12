@@ -65,9 +65,10 @@ namespace Game
                 if (isSelected)
                 {
                     // Draw a handle at the anchor in position
-                    Vector3 anchorInPixelPosition = ToPixels(point.anchorIn);
-                    Vector3 anchorInGroundPixelPosition = ToGroundPixels(point.anchorIn);
-                    float anchorInScale = ToScale(point.anchorIn);
+                    Vector3 anchorIn = point.position + point.anchorIn;
+                    Vector3 anchorInPixelPosition = ToPixels(anchorIn);
+                    Vector3 anchorInGroundPixelPosition = ToGroundPixels(anchorIn);
+                    float anchorInScale = ToScale(anchorIn);
                     float anchorInSize = 2.0f * anchorInScale;
                     Handles.color = Color.gray;
                     Handles.DrawLine(anchorInPixelPosition, anchorInGroundPixelPosition);
@@ -117,9 +118,10 @@ namespace Game
                 if (isSelected)
                 {
                     // Draw a handle at the anchor out position
-                    Vector3 anchorOutPixelPosition = ToPixels(point.anchorOut);
-                    Vector3 anchorOutGroundPixelPosition = ToGroundPixels(point.anchorOut);
-                    float anchorOutScale = ToScale(point.anchorOut);
+                    Vector3 anchorOut = point.position + point.anchorOut;
+                    Vector3 anchorOutPixelPosition = ToPixels(anchorOut);
+                    Vector3 anchorOutGroundPixelPosition = ToGroundPixels(anchorOut);
+                    float anchorOutScale = ToScale(anchorOut);
                     float anchorOutSize = 2.0f * anchorOutScale;
                     Handles.color = Color.gray;
                     Handles.DrawLine(anchorOutPixelPosition, anchorOutGroundPixelPosition);
@@ -151,11 +153,11 @@ namespace Game
                     }
                     else if (selectedPointType == SelectedPointType.AnchorIn)
                     {
-                        selectedVector = point.anchorIn;
+                        selectedVector = point.position + point.anchorIn;
                     }
                     else
                     {
-                        selectedVector = point.anchorOut;
+                        selectedVector = point.position + point.anchorOut;
                     }
 
                     Vector3 selectedPixelPosition;
@@ -183,22 +185,25 @@ namespace Game
                         {
                             newPosition = PerspectiveManager.ToPerspective(newPixelPosition.x, newPixelPosition.y, selectedVector.z);
                         }
-                        Vector3 diff = newPosition - point.position;
                         if (selectedPointType == SelectedPointType.Point)
                         {
                             point.position = newPosition;
-                            point.anchorIn += diff;
-                            point.anchorOut += diff;
                         }
                         else if (selectedPointType == SelectedPointType.AnchorIn)
                         {
-                            point.anchorIn = newPosition;
-                            point.anchorOut = point.position - diff;
+                            point.anchorIn = newPosition - point.position;
+                            if (point.mirrorAnchors)
+                            {
+                                point.anchorOut = -point.anchorIn;
+                            }
                         }
                         else
                         {
-                            point.anchorOut = newPosition;
-                            point.anchorIn = point.position - diff;
+                            point.anchorOut = newPosition - point.position;
+                            if (point.mirrorAnchors)
+                            {
+                                point.anchorIn = -point.anchorOut;
+                            }
                         }
                         Undo.RecordObject(path, "Move Point");
                         EditorUtility.SetDirty(path);
