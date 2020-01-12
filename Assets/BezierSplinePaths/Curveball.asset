@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points:
   - position: {x: -95.52893, y: 0, z: 100}
-    anchorIn: {x: -205.52144, y: 0, z: 180}
-    anchorOut: {x: 124.456085, y: 0, z: -60}
-  - position: {x: 0, y: 0, z: 0}
-    anchorIn: {x: 0, y: 0, z: 10}
-    anchorOut: {x: 0, y: 0, z: -10}
+    anchorIn: {x: -144.88097, y: -12.524717, z: 148.09334}
+    anchorOut: {x: -46.1769, y: 12.524717, z: 51.90666}
+  - position: {x: -14.210915, y: 0, z: 0}
+    anchorIn: {x: -28.697378, y: 0, z: 5.7509465}
+    anchorOut: {x: 0.27554893, y: 0, z: -5.7509465}
