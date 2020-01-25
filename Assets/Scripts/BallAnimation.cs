@@ -28,6 +28,17 @@ namespace Game
             }
         }
 
+        public Vector3 GetPosition(float t)
+        {
+            int index = Mathf.Min(points.Count - 2, Mathf.FloorToInt(t * (points.Count - 1)));
+            Vector3 startPoint = points[index];
+            Vector3 endPoint = points[index + 1];
+            float startTime = index / ((float)(points.Count - 1));
+            float endTime = (index + 1) / ((float)(points.Count - 1));
+            float p = (t - startTime) / (endTime - startTime);
+            return (1 - p) * startPoint + p * endPoint;
+        }
+
         public void Generate()
         {
             int numSteps = 100;
@@ -52,7 +63,7 @@ namespace Game
             float distOfNextPointToAdd = 0.0f;
             for (int i = 1; i <= numSteps; i++)
             {
-                float t = ((float)i) / ((float)numSteps);
+                float t = i / ((float)numSteps);
                 Vector3 nextPathPoint = path.GetPosition(t);
                 float distBetweenPoints = Vector3.Distance(prevPathPoint, nextPathPoint);
                 while (distOfNextPointToAdd <= distOfPathSoFar + distBetweenPoints)

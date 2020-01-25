@@ -18,7 +18,7 @@ namespace Game
         private static readonly float strikeZoneCellWidth = 10.0f;
         private static readonly float strikeZoneCellHeight = 10.0f;
 
-        private static readonly float pitchersMoundRelativeSize = 0.2f;
+        private static readonly float pitchersMoundRelativeSize = 0.1f;
 
         /* Perspective units
          * z = 0 is where the batter is standing
