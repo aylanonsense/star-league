@@ -35,12 +35,11 @@ namespace Game
 
             // Draw the bezier curve
             Handles.color = Color.cyan;
-            Vector3 prevBezierPixelPosition = Vector3.zero;
+            Vector2 prevBezierPixelPosition = Vector3.zero;
             for (float t = 0.0f; t <= 1.0f; t += 0.001f)
             {
                 Vector3 bezierPosition = path.GetPosition(t);
-                Vector3 bezierPixelPosition = PerspectiveManager.ToPixels(bezierPosition);
-                bezierPixelPosition.z = 0.0f;
+                Vector2 bezierPixelPosition = PerspectiveManager.ToPixels(bezierPosition);
                 if (t > 0.0f)
                 {
                     Handles.DrawLine(prevBezierPixelPosition, bezierPixelPosition);
@@ -57,18 +56,18 @@ namespace Game
                 bool isSelected = (selectedPointIndex == i);
 
                 // Do some perspective math to figure out where the ball will be rendered at this point
-                Vector3 pixelPosition = ToPixels(point.position);
-                Vector3 groundPixelPosition = ToGroundPixels(point.position);
-                float scale = ToScale(point.position);
+                Vector2 pixelPosition = PerspectiveManager.ToPixels(point.position);
+                Vector2 groundPixelPosition = PerspectiveManager.ToGroundPixels(point.position);
+                float scale = PerspectiveManager.ToPixelScale(point.position.z);
                 float radius = 15.0f * scale / 2;
 
                 if (isSelected)
                 {
                     // Draw a handle at the anchor in position
                     Vector3 anchorIn = point.position + point.anchorIn;
-                    Vector3 anchorInPixelPosition = ToPixels(anchorIn);
-                    Vector3 anchorInGroundPixelPosition = ToGroundPixels(anchorIn);
-                    float anchorInScale = ToScale(anchorIn);
+                    Vector2 anchorInPixelPosition = PerspectiveManager.ToPixels(anchorIn);
+                    Vector2 anchorInGroundPixelPosition = PerspectiveManager.ToGroundPixels(anchorIn);
+                    float anchorInScale = PerspectiveManager.ToPixelScale(anchorIn.z);
                     float anchorInSize = 2.0f * anchorInScale;
                     Handles.color = Color.gray;
                     Handles.DrawLine(anchorInPixelPosition, anchorInGroundPixelPosition);
@@ -120,9 +119,9 @@ namespace Game
                 {
                     // Draw a handle at the anchor out position
                     Vector3 anchorOut = point.position + point.anchorOut;
-                    Vector3 anchorOutPixelPosition = ToPixels(anchorOut);
-                    Vector3 anchorOutGroundPixelPosition = ToGroundPixels(anchorOut);
-                    float anchorOutScale = ToScale(anchorOut);
+                    Vector2 anchorOutPixelPosition = PerspectiveManager.ToPixels(anchorOut);
+                    Vector2 anchorOutGroundPixelPosition = PerspectiveManager.ToGroundPixels(anchorOut);
+                    float anchorOutScale = PerspectiveManager.ToPixelScale(anchorOut.z);
                     float anchorOutSize = 2.0f * anchorOutScale;
                     Handles.color = Color.gray;
                     Handles.DrawLine(anchorOutPixelPosition, anchorOutGroundPixelPosition);
@@ -161,14 +160,14 @@ namespace Game
                         selectedVector = point.position + point.anchorOut;
                     }
 
-                    Vector3 selectedPixelPosition;
+                    Vector2 selectedPixelPosition;
                     if (hasSelectedGround)
                     {
-                        selectedPixelPosition = ToGroundPixels(selectedVector);
+                        selectedPixelPosition = PerspectiveManager.ToGroundPixels(selectedVector);
                     }
                     else
                     {
-                        selectedPixelPosition = ToPixels(selectedVector);
+                        selectedPixelPosition = PerspectiveManager.ToPixels(selectedVector);
                     }
 
                     EditorGUI.BeginChangeCheck();
@@ -255,24 +254,6 @@ namespace Game
             selectedPointIndex = -1;
             selectedPointType = SelectedPointType.None;
             hasSelectedGround = false;
-        }
-
-        private Vector2 ToPixels(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position);
-            return new Vector2(pixels.x, pixels.y);
-        }
-
-        private Vector2 ToGroundPixels(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position.x, PerspectiveManager.GroundY(), position.z);
-            return new Vector2(pixels.x, pixels.y);
-        }
-
-        private float ToScale(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position);
-            return pixels.z;
         }
     }
 }

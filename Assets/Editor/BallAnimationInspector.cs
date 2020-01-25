@@ -41,9 +41,9 @@ namespace Game
             {
                 float t = i / 20.0f;
                 Vector3 position = anim.GetPosition(t);
-                Vector2 pixelPosition = ToPixels(position);
-                Vector2 groundPixelPosition = ToGroundPixels(position);
-                float scale = ToScale(position);
+                Vector2 pixelPosition = PerspectiveManager.ToPixels(position);
+                Vector2 groundPixelPosition = PerspectiveManager.ToGroundPixels(position);
+                float scale = PerspectiveManager.ToPixelScale(position.z);
                 float radius = 15.0f * scale / 2;
                 Handles.DrawSolidDisc(pixelPosition, Vector3.back, radius);
                 Handles.DrawLine(groundPixelPosition, pixelPosition);
@@ -74,24 +74,6 @@ namespace Game
         protected void OnDisable()
         {
             SceneView.duringSceneGui -= OnSceneGUI;
-        }
-
-        private Vector2 ToPixels(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position);
-            return new Vector2(pixels.x, pixels.y);
-        }
-
-        private Vector2 ToGroundPixels(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position.x, PerspectiveManager.GroundY(), position.z);
-            return new Vector2(pixels.x, pixels.y);
-        }
-
-        private float ToScale(Vector3 position)
-        {
-            Vector3 pixels = PerspectiveManager.ToPixels(position);
-            return pixels.z;
         }
     }
 }

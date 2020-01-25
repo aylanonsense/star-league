@@ -13,12 +13,13 @@ namespace Game
         public override void PrepareToRender()
         {
             // Figure out where the ball and shadow should be drawn
-            Vector3 ballPixelPosition = PerspectiveManager.ToPixels(transform.position.x, transform.position.y, transform.position.z);
-            Vector3 ballShadowPixelPosition = PerspectiveManager.ToPixels(transform.position.x, PerspectiveManager.GroundY(), transform.position.z);
-            Vector3 ballReticlePixelPosition = PerspectiveManager.ToPixels(transform.position.x, transform.position.y, 0.0f);
+            Vector2 ballPixelPosition = PerspectiveManager.ToPixels(transform.position.x, transform.position.y, transform.position.z);
+            float ballPixelScale = PerspectiveManager.ToPixelScale(transform.position.z);
+            Vector2 ballShadowPixelPosition = PerspectiveManager.ToPixels(transform.position.x, PerspectiveManager.GroundY(), transform.position.z);
+            Vector2 ballReticlePixelPosition = PerspectiveManager.ToPixels(transform.position.x, transform.position.y, 0.0f);
 
             // Need to adjust the frame position since not all ball frames are pixel-aligned
-            int frame = Mathf.FloorToInt(Mathf.Clamp(15.0f * ballPixelPosition.z, 3.0f, 16.0f)) - 3;
+            int frame = Mathf.FloorToInt(Mathf.Clamp(15.0f * ballPixelScale, 3.0f, 16.0f)) - 3;
             float frameOffset = (frame % 2 == 0) ? 0.5f : 0.0f;
 
             // Move the ball and shadow to those positions
