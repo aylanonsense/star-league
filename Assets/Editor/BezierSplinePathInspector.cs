@@ -91,10 +91,11 @@ namespace Game
                 }
 
                 // Draw a circle representing where the ball will be at this point
-                Handles.color = isSelected ? Color.yellow : Color.white;
+                Handles.color = new Color(1.0f, 1.0f, isSelected ? 0.0f : 1.0f, 0.1f);
                 Handles.DrawSolidDisc(pixelPosition, Vector3.back, radius);
 
                 // Draw a line from the ball to the ground
+                Handles.color = isSelected ? Color.yellow : Color.white;
                 Handles.DrawLine(pixelPosition, groundPixelPosition);
 
                 // Draw a button where the ground under the ball is
@@ -205,7 +206,7 @@ namespace Game
                                 point.anchorIn = -point.anchorOut;
                             }
                         }
-                        Undo.RecordObject(path, "Move Point");
+                        Undo.RegisterCompleteObjectUndo(path, "Move Point");
                         EditorUtility.SetDirty(path);
                     }
                 }
@@ -230,14 +231,14 @@ namespace Game
                 {
                     path.points.Insert(selectedPointIndex + 1, new BezierSplinePoint(new Vector3(selectedPoint.position.x, selectedPoint.position.y, selectedPoint.position.z - 10.0f)));
                     selectedPointIndex += 1;
-                    Undo.RecordObject(path, "Add Point");
+                    Undo.RegisterCompleteObjectUndo(path, "Add Point");
                     EditorUtility.SetDirty(path);
                 }
                 if (GUILayout.Button("Delete Point"))
                 {
                     path.points.RemoveAt(selectedPointIndex);
                     selectedPointIndex -= 1;
-                    Undo.RecordObject(path, "Delete Point");
+                    Undo.RegisterCompleteObjectUndo(path, "Delete Point");
                     EditorUtility.SetDirty(path);
                 }
             }
